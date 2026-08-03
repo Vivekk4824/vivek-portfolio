@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vivek Patil – Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+  :root {
+    --bg: #0A0F1E;
+    --bg2: #0D1428;
+    --bg3: #111827;
+    --surface: #131C30;
+    --surface2: #192038;
+    --border: #1E2D4A;
+    --accent: #3B82F6;
+    --accent2: #60A5FA;
+    --accent3: #7C3AED;
+    --green: #10B981;
+    --orange: #F59E0B;
+    --red: #EF4444;
+    --text: #E2E8F0;
+    --text2: #94A3B8;
+    --text3: #64748B;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+    --glow: 0 0 40px rgba(59,130,246,0.15);
+    --glow-strong: 0 0 60px rgba(59,130,246,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    overflow-x: hidden;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg2); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,15,30,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--text); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent2); }
+  .nav-links .num { color: var(--accent); margin-right: 4px; }
+  .nav-social { display: flex; gap: 0.75rem; }
+  .nav-social a {
+    display: flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: all 0.2s;
+  }
+  .nav-social a:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* SECTIONS */
+  section { padding: 100px 0 60px; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding-top: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block; width: 40px; height: 1px;
+    background: var(--accent);
+  }
+  h1.hero-name {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  h1.hero-name .accent { color: var(--accent); }
+  .hero-role {
+    font-family: var(--mono);
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--text2);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  .hero-role .tag {
+    color: var(--green);
+    background: rgba(16,185,129,0.1);
+    border: 1px solid rgba(16,185,129,0.2);
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    margin-right: 6px;
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+  .hero-stats {
+    display: flex; gap: 2.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+  .stat-box {
+    display: flex; flex-direction: column;
+    border-left: 2px solid var(--accent);
+    padding-left: 1rem;
+  }
+  .stat-num {
+    font-family: var(--mono);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent2);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    padding: 0.75rem 1.75rem;
+    background: var(--accent);
+    color: #fff;
+    border: none; border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: var(--glow); }
+  .btn-outline {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    padding: 0.75rem 1.75rem;
+    background: transparent;
+    color: var(--accent2);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .btn-outline:hover { background: rgba(59,130,246,0.08); transform: translateY(-2px); }
+
+  /* CODE TERMINAL */
+  .hero-terminal {
+    position: absolute; right: 2rem; top: 50%; transform: translateY(-50%);
+    width: 420px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--glow);
+    font-family: var(--mono);
+    display: none;
+  }
+  @media (min-width: 1100px) { .hero-terminal { display: block; } }
+  .term-header {
+    background: var(--surface2);
+    padding: 10px 16px;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .term-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .term-dot.red { background: #EF4444; }
+  .term-dot.yellow { background: #F59E0B; }
+  .term-dot.green { background: #10B981; }
+  .term-title { font-size: 0.7rem; color: var(--text3); margin-left: 8px; }
+  .term-body { padding: 1rem 1.25rem; font-size: 0.75rem; line-height: 1.8; }
+  .term-line { display: flex; gap: 8px; }
+  .term-prompt { color: var(--green); }
+  .term-cmd { color: var(--accent2); }
+  .term-out { color: var(--text2); padding-left: 1rem; }
+  .term-key { color: var(--orange); }
+  .term-val { color: var(--green); }
+  .term-cursor {
+    display: inline-block; width: 8px; height: 14px;
+    background: var(--accent);
+    animation: blink 1s step-end infinite;
+    vertical-align: middle;
+  }
+  @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+
+  /* SECTION HEADER */
+  .section-label {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1; max-width: 60px; height: 1px;
+    background: var(--accent);
+  }
+  h2.section-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin-bottom: 3rem;
+  }
+  h2.section-title em { font-style: normal; color: var(--accent2); }
+
+  /* SKILLS */
+  #skills { background: var(--bg2); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: all 0.3s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); box-shadow: var(--glow); }
+  .skill-cat {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .skill-cat svg { flex-shrink: 0; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text2);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+  .skill-tag:hover { color: var(--accent2); border-color: var(--accent); }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--card-accent, var(--accent));
+  }
+  .project-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); border-color: var(--card-accent, var(--accent)); }
+  .project-num {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+  .project-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+  .project-sub {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text3);
+    margin-bottom: 1rem;
+  }
+  .project-desc {
+    font-size: 0.85rem;
+    color: var(--text2);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .project-highlights { margin-bottom: 1.25rem; }
+  .project-highlight {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text2);
+    padding: 3px 0;
+    display: flex; align-items: flex-start; gap: 6px;
+  }
+  .project-highlight::before { content: '→'; color: var(--card-accent, var(--accent)); flex-shrink: 0; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .stack-chip {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    padding: 3px 8px;
+    background: rgba(59,130,246,0.08);
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 3px;
+    color: var(--accent2);
+    letter-spacing: 0.03em;
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--bg2); }
+  .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.75rem;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.5rem;
+    transition: all 0.3s;
+  }
+  .exp-card:hover { border-color: var(--accent); box-shadow: var(--glow); }
+  .exp-icon {
+    width: 44px; height: 44px;
+    background: rgba(59,130,246,0.1);
+    border: 1px solid rgba(59,130,246,0.2);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+  .exp-type {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+  .exp-role {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+  .exp-org { font-size: 0.85rem; color: var(--text2); margin-bottom: 0.5rem; }
+  .exp-period {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text3);
+    margin-bottom: 0.75rem;
+  }
+  .exp-points { list-style: none; }
+  .exp-points li {
+    font-size: 0.83rem;
+    color: var(--text2);
+    padding: 3px 0;
+    display: flex; gap: 8px; align-items: flex-start;
+    line-height: 1.5;
+  }
+  .exp-points li::before { content: '▸'; color: var(--accent); flex-shrink: 0; margin-top: 1px; }
+
+  /* ACHIEVEMENTS */
+  .achievements-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .ach-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: all 0.3s;
+  }
+  .ach-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .ach-icon { font-size: 1.75rem; flex-shrink: 0; }
+  .ach-title { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+  .ach-desc { font-size: 0.78rem; color: var(--text2); line-height: 1.4; }
+
+  /* EDUCATION */
+  #education { background: var(--bg2); }
+  .edu-list { display: flex; flex-direction: column; gap: 1rem; }
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    display: flex; justify-content: space-between; gap: 1rem;
+    align-items: flex-start;
+    transition: all 0.3s;
+    flex-wrap: wrap;
+  }
+  .edu-card:hover { border-color: var(--accent); }
+  .edu-degree { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.3rem; }
+  .edu-inst { font-size: 0.83rem; color: var(--text2); margin-bottom: 0.2rem; }
+  .edu-courses {
+    display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem;
+  }
+  .edu-course {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--text3);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  .edu-right { text-align: right; flex-shrink: 0; }
+  .edu-period { font-family: var(--mono); font-size: 0.7rem; color: var(--text3); margin-bottom: 0.4rem; }
+  .edu-score {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent2);
+  }
+
+  /* CERTS */
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+  .cert-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    transition: all 0.2s;
+  }
+  .cert-card:hover { border-color: var(--accent); }
+  .cert-name { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+  .cert-org { font-size: 0.78rem; color: var(--text2); margin-bottom: 0.2rem; }
+  .cert-date { font-family: var(--mono); font-size: 0.68rem; color: var(--text3); }
+
+  /* CONTACT / FOOTER */
+  #contact { background: var(--bg); border-top: 1px solid var(--border); text-align: center; }
+  .contact-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+  .contact-sub { font-size: 1rem; color: var(--text2); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text2);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 0.65rem 1.25rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--accent2); }
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--text3);
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+  }
+  .footer-copy a { color: var(--accent2); text-decoration: none; }
+
+  /* ACTIVE NAV */
+  .nav-links a.active { color: var(--accent2); }
+
+  /* Loading */
+  .loading {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 80px;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text3);
+    gap: 8px;
+  }
+  .spin {
+    width: 16px; height: 16px;
+    border: 2px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 768px) {
+    .exp-card { grid-template-columns: 1fr; }
+    nav .nav-links { display: none; }
+    h1.hero-name { font-size: 3rem; }
+  }
+
+  /* fade-in animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.6s ease forwards; }
+  .fade-up-d1 { animation-delay: 0.1s; opacity: 0; animation-fill-mode: both; }
+  .fade-up-d2 { animation-delay: 0.2s; opacity: 0; animation-fill-mode: both; }
+  .fade-up-d3 { animation-delay: 0.3s; opacity: 0; animation-fill-mode: both; }
+  .fade-up-d4 { animation-delay: 0.4s; opacity: 0; animation-fill-mode: both; }
+  .fade-up-d5 { animation-delay: 0.5s; opacity: 0; animation-fill-mode: both; }
+
+  /* Typing cursor for hero */
+  .typing-line { display: inline; }
+  .typed-cursor {
+    display: inline-block;
+    width: 2px; height: 1em;
+    background: var(--accent);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#hero"><span>// </span>vivek.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about"><span class="num">01.</span>About</a></li>
+    <li><a href="#skills"><span class="num">02.</span>Skills</a></li>
+    <li><a href="#projects"><span class="num">03.</span>Projects</a></li>
+    <li><a href="#experience"><span class="num">04.</span>Experience</a></li>
+    <li><a href="#achievements"><span class="num">05.</span>Achievements</a></li>
+    <li><a href="#contact"><span class="num">06.</span>Contact</a></li>
+  </ul>
+  <div class="nav-social">
+    <a href="https://github.com/Vivekk4824" target="_blank" rel="noopener" title="GitHub">GH</a>
+    <a href="https://linkedin.com/in/vivek-patil-it/" target="_blank" rel="noopener" title="LinkedIn">LI</a>
+    <a href="https://leetcode.com/u/Vivek1276/" target="_blank" rel="noopener" title="LeetCode">LC</a>
+  </div>
+</nav>
+
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef } = React;
+
+// ── Typing animation hook ──────────────────────────────────
+function useTyping(words, speed = 80, pause = 1800) {
+  const [text, setText] = useState('');
+  const [wordIdx, setWordIdx] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+  useEffect(() => {
+    const cur = words[wordIdx];
+    const delay = deleting ? speed / 2 : speed;
+    const t = setTimeout(() => {
+      if (!deleting && text === cur) {
+        setTimeout(() => setDeleting(true), pause);
+        return;
+      }
+      if (deleting && text === '') {
+        setDeleting(false);
+        setWordIdx(i => (i + 1) % words.length);
+        return;
+      }
+      setText(deleting ? cur.slice(0, text.length - 1) : cur.slice(0, text.length + 1));
+    }, delay);
+    return () => clearTimeout(t);
+  }, [text, deleting, wordIdx]);
+  return text;
+}
+
+// ── Fetch hook ─────────────────────────────────────────────
+function usePortfolio() {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    // Inline data so the HTML works standalone without a running server
+    setData({
+      hero: {
+        name: "Vivek Patil",
+        leetcode: "https://leetcode.com/u/Vivek1276/",
+        github: "https://github.com/Vivekk4824",
+        linkedin: "https://linkedin.com/in/vivek-patil-it/",
+        email: "vivekk.codes1@gmail.com",
+        stats: { leetcodeSolved: "340+", maxRating: "1522", codechef: "2★", cgpa: "8.39" }
+      },
+      skills: [
+        { category: "Languages", icon: "⌨", items: ["C", "C++", "Java", "Python", "JavaScript"] },
+        { category: "Web Development", icon: "🌐", items: ["ReactJS", "NodeJS", "Express", "TailwindCSS", "HTML/CSS"] },
+        { category: "AI / ML", icon: "🤖", items: ["Scikit-learn", "NLTK", "Pandas", "Matplotlib", "Seaborn"] },
+        { category: "Tools & Databases", icon: "🛠", items: ["Git", "GitHub", "MySQL", "MongoDB", "Power BI", "Postman"] }
+      ],
+      projects: [
+        {
+          id:1, name:"Deepfake Detection App", subtitle:"AI Image Verification System",
+          stack:["Streamlit","Deep Learning","Gemini API","CNN"], period:"Jan 2026",
+          description:"AI-powered deepfake image detector using Deep Learning and LLM-based analysis. Processed 1000+ images with augmentation, pixel-level analysis, and metadata validation.",
+          highlights:["CNN architecture for image classification","LLM reasoning via Gemini API","Optimized inference on 1000+ images","Pixel-level & metadata validation"],
+          color:"#7C3AED"
+        },
+        {
+          id:2, name:"VruddhSeva", subtitle:"Senior Citizen Assistance Mobile App",
+          stack:["React Native","Firebase","Maps","FCM"], period:"Oct 2025",
+          description:"Cross-platform mobile app for senior citizens with healthcare support, medicine reminders, emergency SOS, and real-time Firebase notifications.",
+          highlights:["Cross-platform React Native build","Emergency SOS with real-time alerts","Medicine reminders & scheduling","Firebase backend & FCM notifications"],
+          color:"#0EA5E9"
+        },
+        {
+          id:3, name:"ReadMyPDF", subtitle:"PDF Query Web App",
+          stack:["Streamlit","OpenAI","FAISS","RAG"], period:"2025",
+          description:"Upload PDFs and query them using natural language via FAISS vector embeddings and LLM-based retrieval augmented generation.",
+          highlights:["RAG system with FAISS vector search","Semantic chunking for large docs","Embedding indexing for low latency","Scalable semantic search pipeline"],
+          color:"#10B981"
+        }
+      ],
+      experience: [
+        { id:1, icon:"🌿", type:"Open Source", role:"Student Contributor", org:"GirlScript Summer of Code '25", period:"Sep 2025 – Oct 2025",
+          points:["Contributed to open-source repos: bug fixes, UI improvements, and new features.","Collaborated via GitHub PRs, issue discussions, and community channels.","Awarded Hacktoberfest 2025 Super Contributor."] },
+        { id:2, icon:"💼", type:"Internship", role:"Trainee Intern", org:"Edunet-Shell Skills4Future (AICTE)", period:"Dec 2024 – Jan 2025",
+          points:["Built project-based course on Email Marketing trends using NLP and unsupervised learning.","Cleaned and pre-processed email marketing datasets for trend modeling.","Built interactive Power BI dashboard with DAX measures for CTR, open rates, and engagement."] },
+        { id:3, icon:"📡", type:"Extracurricular", role:"Media & Content Coordinator", org:"Star 24 Fast News", period:"2023–2024",
+          points:["Managed Instagram and Facebook content strategy for a live news channel.","Handled video editing, news posting, interview coverage, and on-ground journalism."] }
+      ],
+      achievements: [
+        { icon:"🏆", title:"340+ LeetCode Problems", desc:"Max contest rating of 1522" },
+        { icon:"⭐", title:"CodeChef 2-Star", desc:"Consistent competitive programming" },
+        { icon:"🎯", title:"4th Rank – CodeMaze", desc:"TELEKINESIS 2026 @ KKWIEER, Jan 2026" },
+        { icon:"🚀", title:"NASA Space Apps 2025", desc:"Weather forecasting ML solution (Team Etoile)" },
+        { icon:"💡", title:"Smart India Hackathon '24", desc:"Team Lead – Team StationMaster" },
+        { icon:"🌐", title:"Hacktoberfest Super Contributor", desc:"Quality PRs merged, Oct 2025" }
+      ],
+      certificates: [
+        { name:"Postman API Fundamentals Student Expert", org:"Postman", date:"Oct 2025" },
+        { name:"Python Spoken Tutorial Certificate", org:"IIT Bombay – Spoken Tutorial", date:"Nov 2025" },
+        { name:"CPP Spoken Tutorial Certificate", org:"IIT Bombay – Spoken Tutorial", date:"May 2024" }
+      ],
+      education: [
+        { degree:"B.Tech – Information Technology", institution:"K.K. Wagh Institute of Engineering Education and Research", period:"Jul 2023 – Jun 2027", score:"CGPA: 8.39", courses:["Data Structures","Algorithms","OS","Machine Learning","Computer Organisation","Databases"] },
+        { degree:"Higher Secondary Certificate (Class XII)", institution:"Amro Junior College, Vilholi, Nashik", period:"2022 – 2023", score:"72.83%", courses:[] },
+        { degree:"Secondary School Certificate (Class X)", institution:"St. Lawrence High School & Jr. College, Nashik", period:"2020 – 2021", score:"80%", courses:[] }
+      ]
+    });
+  }, []);
+  return data;
+}
+
+// ── HERO TERMINAL ──────────────────────────────────────────
+function Terminal() {
+  return (
+    <div className="hero-terminal">
+      <div className="term-header">
+        <div className="term-dot red" /><div className="term-dot yellow" /><div className="term-dot green" />
+        <span className="term-title">vivek@portfolio ~ zsh</span>
+      </div>
+      <div className="term-body">
+        <div className="term-line"><span className="term-prompt">❯</span><span className="term-cmd"> whoami</span></div>
+        <div className="term-out"><span className="term-key">name:</span> <span className="term-val">"Vivek Patil"</span></div>
+        <div className="term-out"><span className="term-key">role:</span> <span className="term-val">"IT Undergraduate + Dev"</span></div>
+        <br/>
+        <div className="term-line"><span className="term-prompt">❯</span><span className="term-cmd"> leetcode --stats</span></div>
+        <div className="term-out"><span className="term-key">solved:</span> <span className="term-val">340+</span></div>
+        <div className="term-out"><span className="term-key">max_rating:</span> <span className="term-val">1522</span></div>
+        <div className="term-out"><span className="term-key">codechef:</span> <span className="term-val">"2-Star ⭐⭐"</span></div>
+        <br/>
+        <div className="term-line"><span className="term-prompt">❯</span><span className="term-cmd"> git log --oneline</span></div>
+        <div className="term-out">7a3f9c1 feat: deepfake-detection-app</div>
+        <div className="term-out">3e1a2d8 feat: vruddhseva-mobile-app</div>
+        <div className="term-out">c92b5e4 feat: readmypdf-rag-system</div>
+        <br/>
+        <div className="term-line"><span className="term-prompt">❯</span><span className="term-cmd"> cat status.txt</span></div>
+        <div className="term-out">🟢 Open to internships & collabs</div>
+        <div className="term-line"><span className="term-prompt">❯</span><span className="term-cursor" /></div>
+      </div>
+    </div>
+  );
+}
+
+// ── SKILLS SECTION ─────────────────────────────────────────
+function Skills({ skills }) {
+  return (
+    <section id="skills">
+      <div className="container">
+        <div className="section-label">02. Skills</div>
+        <h2 className="section-title">What I <em>Build With</em></h2>
+        <div className="skills-grid">
+          {skills.map((s, i) => (
+            <div key={i} className={`skill-card fade-up fade-up-d${i+1}`}>
+              <div className="skill-cat">
+                <span>{s.icon}</span> {s.category}
+              </div>
+              <div className="skill-tags">
+                {s.items.map((item, j) => (
+                  <span key={j} className="skill-tag">{item}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── PROJECTS SECTION ───────────────────────────────────────
+function Projects({ projects }) {
+  return (
+    <section id="projects">
+      <div className="container">
+        <div className="section-label">03. Projects</div>
+        <h2 className="section-title">Things I've <em>Built</em></h2>
+        <div className="projects-grid">
+          {projects.map((p, i) => (
+            <div
+              key={p.id}
+              className={`project-card fade-up fade-up-d${i+1}`}
+              style={{ '--card-accent': p.color }}
+            >
+              <div className="project-num">PROJECT_{String(i+1).padStart(2,'0')} · {p.period}</div>
+              <div className="project-name">{p.name}</div>
+              <div className="project-sub">{p.subtitle}</div>
+              <div className="project-desc">{p.description}</div>
+              <div className="project-highlights">
+                {p.highlights.map((h, j) => (
+                  <div key={j} className="project-highlight">{h}</div>
+                ))}
+              </div>
+              <div className="project-stack">
+                {p.stack.map((t, j) => (
+                  <span key={j} className="stack-chip">{t}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── EXPERIENCE SECTION ─────────────────────────────────────
+function Experience({ experience }) {
+  return (
+    <section id="experience">
+      <div className="container">
+        <div className="section-label">04. Experience</div>
+        <h2 className="section-title">Where I've <em>Worked</em></h2>
+        <div className="exp-list">
+          {experience.map((e, i) => (
+            <div key={e.id} className={`exp-card fade-up fade-up-d${i+1}`}>
+              <div className="exp-icon">{e.icon}</div>
+              <div>
+                <div className="exp-type">{e.type}</div>
+                <div className="exp-role">{e.role}</div>
+                <div className="exp-org">{e.org}</div>
+                <div className="exp-period">{e.period}</div>
+                <ul className="exp-points">
+                  {e.points.map((p, j) => <li key={j}>{p}</li>)}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── ACHIEVEMENTS ───────────────────────────────────────────
+function Achievements({ achievements, certificates }) {
+  return (
+    <section id="achievements">
+      <div className="container">
+        <div className="section-label">05. Achievements</div>
+        <h2 className="section-title">What I've <em>Earned</em></h2>
+        <div className="achievements-grid" style={{marginBottom:'3rem'}}>
+          {achievements.map((a, i) => (
+            <div key={i} className={`ach-card fade-up fade-up-d${i+1}`}>
+              <div className="ach-icon">{a.icon}</div>
+              <div>
+                <div className="ach-title">{a.title}</div>
+                <div className="ach-desc">{a.desc}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="section-label" style={{marginBottom:'1rem'}}>Certificates</div>
+        <div className="certs-grid">
+          {certificates.map((c, i) => (
+            <div key={i} className={`cert-card fade-up fade-up-d${i+1}`}>
+              <div className="cert-name">🎓 {c.name}</div>
+              <div className="cert-org">{c.org}</div>
+              <div className="cert-date">{c.date}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── EDUCATION ──────────────────────────────────────────────
+function Education({ education }) {
+  return (
+    <section id="education">
+      <div className="container">
+        <div className="section-label">Education</div>
+        <h2 className="section-title">Academic <em>Background</em></h2>
+        <div className="edu-list">
+          {education.map((e, i) => (
+            <div key={i} className={`edu-card fade-up fade-up-d${i+1}`}>
+              <div>
+                <div className="edu-degree">{e.degree}</div>
+                <div className="edu-inst">{e.institution}</div>
+                {e.courses.length > 0 && (
+                  <div className="edu-courses">
+                    {e.courses.map((c, j) => <span key={j} className="edu-course">{c}</span>)}
+                  </div>
+                )}
+              </div>
+              <div className="edu-right">
+                <div className="edu-period">{e.period}</div>
+                <div className="edu-score">{e.score}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── CONTACT ────────────────────────────────────────────────
+function Contact() {
+  return (
+    <section id="contact">
+      <div className="container">
+        <div className="contact-title">
+          Let's <span style={{color:'var(--accent)'}}>Connect</span>
+        </div>
+        <p className="contact-sub">
+          Open to internships, collaborations, open-source, and anything cool in tech. Reach out!
+        </p>
+        <div className="contact-links">
+          <a className="contact-link" href="mailto:vivekk.codes1@gmail.com">
+            📧 vivekk.codes1@gmail.com
+          </a>
+          <a className="contact-link" href="https://github.com/Vivekk4824" target="_blank" rel="noopener">
+            ⚡ GitHub
+          </a>
+          <a className="contact-link" href="https://linkedin.com/in/vivek-patil-it/" target="_blank" rel="noopener">
+            💼 LinkedIn
+          </a>
+          <a className="contact-link" href="https://leetcode.com/u/Vivek1276/" target="_blank" rel="noopener">
+            🧩 LeetCode
+          </a>
+        </div>
+        <div className="footer-copy">
+          Built with React & Express · Designed for humans, optimised for compilers ·{' '}
+          <a href="https://github.com/Vivekk4824" target="_blank" rel="noopener">@Vivekk4824</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ── MAIN APP ───────────────────────────────────────────────
+function App() {
+  const data = usePortfolio();
+  const roles = ["DSA Problem Solver", "Full Stack Developer", "AI/ML Enthusiast", "Open Source Contributor"];
+  const typed = useTyping(roles);
+
+  if (!data) return (
+    <div style={{display:'flex',alignItems:'center',justifyContent:'center',height:'100vh'}}>
+      <div className="loading"><div className="spin" /> Loading portfolio...</div>
+    </div>
+  );
+
+  return (
+    <>
+      {/* HERO */}
+      <section id="hero">
+        <div className="hero-grid" />
+        <div className="hero-content">
+          <div className="hero-eyebrow fade-up fade-up-d1">Available for Internships &amp; Collabs</div>
+          <h1 className="hero-name fade-up fade-up-d2">
+            Vivek<br/><span className="accent">Patil</span>
+          </h1>
+          <div className="hero-role fade-up fade-up-d3">
+            <span className="tag">IT Undergrad @ KKWIEER '27</span>
+            <span className="tag">Nashik, MH</span>
+            <br/>
+            <span style={{color:'var(--accent2)', fontFamily:'var(--mono)', fontSize:'1rem'}}>
+              {typed}<span className="typed-cursor"/>
+            </span>
+          </div>
+          <div className="hero-stats fade-up fade-up-d3">
+            <div className="stat-box">
+              <span className="stat-num">340+</span>
+              <span className="stat-label">LeetCode Problems</span>
+            </div>
+            <div className="stat-box">
+              <span className="stat-num">1522</span>
+              <span className="stat-label">Max LeetCode Rating</span>
+            </div>
+            <div className="stat-box">
+              <span className="stat-num">2★</span>
+              <span className="stat-label">CodeChef Rating</span>
+            </div>
+            <div className="stat-box">
+              <span className="stat-num">8.39</span>
+              <span className="stat-label">CGPA</span>
+            </div>
+          </div>
+          <div className="hero-cta fade-up fade-up-d4">
+            <a className="btn-primary" href="#projects">View Projects →</a>
+            <a className="btn-outline" href="https://github.com/Vivekk4824" target="_blank" rel="noopener">GitHub ↗</a>
+            <a className="btn-outline" href="https://leetcode.com/u/Vivek1276/" target="_blank" rel="noopener">LeetCode ↗</a>
+            <a className="btn-outline" href="https://linkedin.com/in/vivek-patil-it/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+        </div>
+        <Terminal />
+      </section>
+
+      {/* ABOUT */}
+      <section id="about" style={{background:'var(--bg2)'}}>
+        <div className="container">
+          <div className="section-label">01. About</div>
+          <h2 className="section-title">A bit <em>About Me</em></h2>
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'3rem', alignItems:'center', flexWrap:'wrap'}}>
+            <div>
+              <p style={{color:'var(--text2)', lineHeight:1.8, fontSize:'0.95rem', marginBottom:'1rem'}}>
+                I'm an <strong style={{color:'var(--text)'}}>Information Technology undergraduate</strong> at KKWIEER, Nashik,
+                graduating in 2027 with a CGPA of 8.39. I have a strong foundation in Computer Science —
+                from data structures and algorithms to machine learning and full-stack development.
+              </p>
+              <p style={{color:'var(--text2)', lineHeight:1.8, fontSize:'0.95rem', marginBottom:'1rem'}}>
+                I've solved <strong style={{color:'var(--accent2)'}}>340+ problems on LeetCode</strong>, achieved a
+                <strong style={{color:'var(--accent2)'}}> 2-Star on CodeChef</strong>, and actively contribute to
+                open source. I've led teams in SIH, participated in NASA Space Apps, and built
+                production-grade apps with React Native, Node.js, and AI tools.
+              </p>
+              <p style={{color:'var(--text2)', lineHeight:1.8, fontSize:'0.95rem'}}>
+                Fluent in English, Hindi, and Marathi. Currently looking for internship
+                opportunities where I can apply my skills and grow further.
+              </p>
+            </div>
+            <div style={{background:'var(--surface)', border:'1px solid var(--border)', borderRadius:'12px', padding:'1.5rem', fontFamily:'var(--mono)', fontSize:'0.78rem', lineHeight:2}}>
+              <div style={{color:'var(--text3)', marginBottom:'0.5rem'}}>// quick.json</div>
+              <div><span style={{color:'var(--accent)'}}>const</span> <span style={{color:'var(--accent2)'}}>vivek</span> = {'{'}</div>
+              <div style={{paddingLeft:'1rem'}}><span style={{color:'var(--orange)'}}>university</span>: <span style={{color:'var(--green)'}}>"KKWIEER, Nashik"</span>,</div>
+              <div style={{paddingLeft:'1rem'}}><span style={{color:'var(--orange)'}}>batch</span>: <span style={{color:'var(--green)'}}>"2023–2027"</span>,</div>
+              <div style={{paddingLeft:'1rem'}}><span style={{color:'var(--orange)'}}>cgpa</span>: <span style={{color:'var(--accent2)'}}>8.39</span>,</div>
+              <div style={{paddingLeft:'1rem'}}><span style={{color:'var(--orange)'}}>openTo</span>: <span style={{color:'var(--green)'}}>"internships"</span>,</div>
+              <div style={{paddingLeft:'1rem'}}><span style={{color:'var(--orange)'}}>hobbies</span>: [<span style={{color:'var(--green)'}}>"DSA"</span>, <span style={{color:'var(--green)'}}>"builds"</span>, <span style={{color:'var(--green)'}}>"OSS"</span>],</div>
+              <div style={{paddingLeft:'1rem'}}><span style={{color:'var(--orange)'}}>languages</span>: [<span style={{color:'var(--green)'}}>"EN"</span>, <span style={{color:'var(--green)'}}>"HI"</span>, <span style={{color:'var(--green)'}}>"MR"</span>]</div>
+              <div>{'}'}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Skills skills={data.skills} />
+      <Projects projects={data.projects} />
+      <Experience experience={data.experience} />
+      <Achievements achievements={data.achievements} certificates={data.certificates} />
+      <Education education={data.education} />
+      <Contact />
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
