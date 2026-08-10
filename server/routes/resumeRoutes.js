@@ -1,22 +1,54 @@
 const express = require("express");
+const fs = require("fs");
+const path = require("path");
 
 const router = express.Router();
 
-const {
-  getResume,
-  uploadResume
-} = require("../controllers/resumeController");
+const uploadResume = require(
+  "../middleware/uploadMiddleware"
+);
 
-const upload = require("../middleware/uploadMiddleware");
+const resumePath = path.join(
+  __dirname,
+  "../uploads/resume.pdf"
+);
 
-// Download current resume
-router.get("/", getResume);
+// ================================
+// DOWNLOAD RESUME
+// ================================
 
-// Upload new resume
+router.get("/", (req, res) => {
+  if (!fs.existsSync(resumePath)) {
+    return res.status(404).json({
+      message: "Resume not uploaded yet"
+    });
+  }
+
+  res.download(
+    resumePath,
+    "Vivek-Patil-Resume.pdf"
+  );
+});
+
+// ================================
+// UPLOAD / REPLACE RESUME
+// ================================
+
 router.post(
   "/upload",
-  upload.single("resume"),
-  uploadResume
+  uploadResume.single("resume"),
+  (req, res) => {
+    if (!req.file) {
+      return res.status(400).json({
+        message: "Please upload a PDF resume"
+      });
+    }
+
+    res.json({
+      message: "Resume uploaded successfully",
+      filename: req.file.filename
+    });
+  }
 );
 
 module.exports = router;

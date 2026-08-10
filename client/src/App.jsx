@@ -5,6 +5,9 @@ import About from "./components/About";
 import Skills from "./components/Skills";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
+import Achievements from "./components/Achievements";
+import Certificates from "./components/Certificates";
+import Education from "./components/Education";
 
 
 
@@ -42,6 +45,9 @@ function App() {
         <Skills skills={data.skills} />
         <Experience experience={data.experience} />
         <Projects projects={data.projects} />
+        <Achievements achievements={data.achievements} />
+        <Certificates certificates={data.certificates} />
+        <Education education={data.education} />
       </main>
     </>
   );

@@ -683,4 +683,337 @@ textarea {
   }
 }
 
+/* =========================
+   ACHIEVEMENTS
+========================= */
+
+.achievements-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+.achievement-card {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 18px;
+
+  padding: 22px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 8px;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.achievement-card:hover {
+  transform: translateY(-4px);
+
+  border-color: var(--accent);
+}
+
+.achievement-icon {
+  flex-shrink: 0;
+
+  width: 45px;
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: var(--surface2);
+
+  border: 1px solid var(--border);
+
+  border-radius: 6px;
+
+  font-size: 1.25rem;
+}
+
+.achievement-content h3 {
+  margin-bottom: 7px;
+
+  font-size: 0.95rem;
+}
+
+.achievement-content p {
+  color: var(--text2);
+
+  font-size: 0.75rem;
+
+  line-height: 1.6;
+}
+
+
+/* =========================
+   CERTIFICATIONS
+========================= */
+
+.certificates-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  max-width: 1000px;
+
+  margin: 0 auto;
+}
+
+.certificate-card {
+  display: grid;
+
+  grid-template-columns:
+    55px 1fr auto;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 20px 24px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 8px;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.certificate-card:hover {
+  transform: translateX(5px);
+
+  border-color: var(--accent2);
+}
+
+.certificate-number {
+  color: var(--accent);
+
+  font-family: var(--mono);
+
+  font-size: 0.75rem;
+}
+
+.certificate-info h3 {
+  margin-bottom: 5px;
+
+  font-size: 0.9rem;
+}
+
+.certificate-info span {
+  color: var(--text3);
+
+  font-family: var(--mono);
+
+  font-size: 0.65rem;
+}
+
+.certificate-card time {
+  color: var(--text3);
+
+  font-family: var(--mono);
+
+  font-size: 0.65rem;
+
+  white-space: nowrap;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .certificate-card {
+    grid-template-columns:
+      40px 1fr;
+
+    gap: 12px;
+  }
+
+  .certificate-card time {
+    grid-column: 2;
+  }
+}
+
+/* =========================
+   EDUCATION
+========================= */
+
+.education-list {
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+.education-card {
+  display: grid;
+
+  grid-template-columns: 150px 1fr;
+
+  gap: 30px;
+
+  padding: 25px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 8px;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.education-card:hover {
+  transform: translateY(-3px);
+
+  border-color: var(--accent);
+}
+
+.education-year {
+  color: var(--accent);
+
+  font-family: var(--mono);
+
+  font-size: 0.7rem;
+
+  line-height: 1.6;
+}
+
+.education-heading {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 20px;
+}
+
+.education-main h3 {
+  font-size: 1.05rem;
+
+  margin-bottom: 7px;
+}
+
+.education-main h4 {
+  color: var(--text2);
+
+  font-size: 0.82rem;
+
+  font-weight: 500;
+}
+
+.education-score {
+  flex-shrink: 0;
+
+  padding: 6px 10px;
+
+  background: var(--surface2);
+
+  border: 1px solid var(--border);
+
+  border-radius: 4px;
+
+  color: var(--green);
+
+  font-family: var(--mono);
+
+  font-size: 0.65rem;
+}
+
+.education-location {
+  margin-top: 10px;
+
+  color: var(--text3);
+
+  font-size: 0.72rem;
+}
+
+.education-courses {
+  margin-top: 20px;
+}
+
+.courses-label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: var(--text3);
+
+  font-family: var(--mono);
+
+  font-size: 0.62rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.06em;
+}
+
+.course-list {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+.course-tag {
+  padding: 5px 8px;
+
+  background: var(--surface2);
+
+  border: 1px solid var(--border);
+
+  border-radius: 3px;
+
+  color: var(--text2);
+
+  font-family: var(--mono);
+
+  font-size: 0.6rem;
+}
+
+@media (max-width: 700px) {
+  .education-card {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+  .education-heading {
+    flex-direction: column;
+
+    gap: 10px;
+  }
+}
+
 

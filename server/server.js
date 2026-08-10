@@ -9,6 +9,7 @@ app.use(cors());
 app.use(express.json());
 
 
+
 // ==========================================
 // PORTFOLIO DATA
 // ==========================================
@@ -338,7 +339,9 @@ app.use(
   )
 );
 
-const resumeRoutes = require("./routes/resumeRoutes");
+const resumeRoutes = require(
+  "./routes/resumeRoutes"
+);
 const leetcodeRoutes = require("./routes/leetcodeRoutes");
 
 app.use(
