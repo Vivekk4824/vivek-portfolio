@@ -1,7 +1,5 @@
-// hooks/usePortfolio.js
-
 import { useEffect, useState } from "react";
-import { getPortfolio } from "../services/api";
+import { getPortfolio } from "../services/portfolioApi";
 
 export default function usePortfolio() {
   const [data, setData] = useState(null);
@@ -9,19 +7,26 @@ export default function usePortfolio() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchPortfolio() {
       try {
-        const result = await getPortfolio();
-        setData(result);
+        const portfolio = await getPortfolio();
+
+        setData(portfolio);
       } catch (err) {
-        setError(err);
+        console.error(err);
+
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     }
 
-    fetchData();
+    fetchPortfolio();
   }, []);
 
-  return { data, loading, error };
+  return {
+    data,
+    loading,
+    error
+  };
 }

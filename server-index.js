@@ -10,7 +10,7 @@ const portfolioData = {
     name: "Vivek Patil",
     title: "Information Technology Undergraduate",
     tagline: "DSA Problem Solver · Full Stack Developer · AI Enthusiast",
-    leetcode: "https://leetcode.com/u/Vivek1276/",
+    leetcode: "https://leetcode.com/u/Vivek_1276/",
     github: "https://github.com/Vivekk4824",
     linkedin: "https://linkedin.com/in/vivek-patil-it/",
     email: "vivekk.codes1@gmail.com",

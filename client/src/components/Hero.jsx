@@ -1,7 +1,9 @@
 import Terminal from "./Terminal";
 import useTyping from "../hooks/useTyping";
+import useLeetCode from "../hooks/useLeetCode";
 
-export default function Hero() {
+
+export default function Hero({ hero }) {
   const roles = [
     "DSA Problem Solver",
     "Full Stack Developer",
@@ -10,6 +12,25 @@ export default function Hero() {
   ];
 
   const typed = useTyping(roles);
+  const {
+  stats: leetcode,
+  loading: leetcodeLoading
+} = useLeetCode();
+
+
+
+  if (!hero) {
+    return (
+      <section className="hero">
+        <div className="hero-content">
+          Loading...
+        </div>
+      </section>
+    );
+  }
+
+  const [firstName, ...rest] = hero.name.split(" ");
+  const lastName = rest.join(" ");
 
   return (
     <section id="hero" className="hero">
@@ -23,19 +44,19 @@ export default function Hero() {
         </div>
 
         <h1 className="hero-name">
-          Vivek
+          {firstName}
           <br />
-          <span>Patil</span>
+          <span>{lastName}</span>
         </h1>
 
         <div className="hero-role">
 
           <span className="tag">
-            IT Undergrad @ KKWIEER '27
+            {hero.title}
           </span>
 
           <span className="tag">
-            Nashik, MH
+            {hero.location}
           </span>
 
           <br />
@@ -50,22 +71,40 @@ export default function Hero() {
         <div className="hero-stats">
 
           <Stat
-            number="340+"
+            number={
+              leetcodeLoading
+                ? "..."
+                : leetcode?.problemsSolved ??
+                  hero.stats.leetcodeSolved
+            }
             label="LeetCode Problems"
+            live={!leetcodeLoading && !!leetcode}
           />
 
           <Stat
-            number="1522"
-            label="Max LeetCode Rating"
+            number={
+              leetcodeLoading
+                ? "..."
+                : leetcode?.rating
+                  ? Math.round(leetcode.rating)
+                  : hero.stats.maxRating
+            }
+            label="Contest Rating"
+            live={!leetcodeLoading && !!leetcode}
           />
 
           <Stat
-            number="2★"
-            label="CodeChef Rating"
+            number={
+              leetcodeLoading
+                ? "..."
+                : leetcode?.contestsAttended ?? "—"
+            }
+            label="Contests Attended"
+            live={!leetcodeLoading && !!leetcode}
           />
 
           <Stat
-            number="8.39"
+            number={hero.stats.cgpa}
             label="CGPA"
           />
 
@@ -89,7 +128,7 @@ export default function Hero() {
 
           <a
             className="btn-outline"
-            href="https://github.com/Vivekk4824"
+            href={hero.github}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -106,11 +145,17 @@ export default function Hero() {
   );
 }
 
-function Stat({ number, label }) {
+function Stat({ number, label, live }) {
   return (
     <div className="stat-box">
       <span className="stat-num">
         {number}
+
+        {live && (
+          <span className="live-dot">
+            ●
+          </span>
+        )}
       </span>
 
       <span className="stat-label">
