@@ -2,6 +2,11 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import usePortfolio from "./hooks/usePortfolio";
 import About from "./components/About";
+import Skills from "./components/Skills";
+import Experience from "./components/Experience";
+import Projects from "./components/Projects";
+
+
 
 
 function App() {
@@ -34,6 +39,9 @@ function App() {
       <main>
         <Hero hero={data.hero} />
         <About about={data.about} />
+        <Skills skills={data.skills} />
+        <Experience experience={data.experience} />
+        <Projects projects={data.projects} />
       </main>
     </>
   );
