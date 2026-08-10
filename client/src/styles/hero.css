@@ -1,0 +1,329 @@
+.hero {
+  min-height: 100vh;
+  padding: 120px 2rem 80px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+
+  max-width: 1200px;
+  margin: 0 auto;
+
+  position: relative;
+}
+
+.hero-grid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    linear-gradient(
+      rgba(59, 130, 246, 0.04) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(59, 130, 246, 0.04) 1px,
+      transparent 1px
+    );
+
+  background-size: 50px 50px;
+
+  mask-image: linear-gradient(
+    to bottom,
+    black,
+    transparent
+  );
+
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+
+  color: var(--green);
+
+  margin-bottom: 1.5rem;
+}
+
+.hero-name {
+  font-size: clamp(4rem, 8vw, 7rem);
+
+  line-height: 0.9;
+
+  letter-spacing: -0.06em;
+
+  margin-bottom: 2rem;
+
+  font-weight: 900;
+}
+
+.hero-name span {
+  color: var(--accent);
+}
+
+.hero-role {
+  font-family: var(--mono);
+
+  font-size: 1rem;
+
+  color: var(--text2);
+
+  line-height: 2;
+}
+
+.tag {
+  display: inline-block;
+
+  border: 1px solid var(--border);
+
+  padding: 4px 10px;
+
+  margin-right: 8px;
+
+  border-radius: 4px;
+
+  font-size: 0.75rem;
+}
+
+.typed-text {
+  color: var(--accent2);
+
+  display: inline-block;
+
+  margin-top: 12px;
+}
+
+.typed-cursor {
+  display: inline-block;
+
+  width: 8px;
+  height: 18px;
+
+  background: var(--accent);
+
+  margin-left: 5px;
+
+  vertical-align: middle;
+
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 45% {
+    opacity: 1;
+  }
+
+  46%, 100% {
+    opacity: 0;
+  }
+}
+
+.hero-stats {
+  display: flex;
+
+  gap: 1rem;
+
+  margin-top: 2rem;
+}
+
+.stat-box {
+  border-left: 2px solid var(--accent);
+
+  padding-left: 12px;
+}
+
+.stat-num {
+  display: block;
+
+  font-family: var(--mono);
+
+  font-size: 1.2rem;
+
+  font-weight: 700;
+
+  color: var(--text);
+}
+
+.stat-label {
+  display: block;
+
+  color: var(--text3);
+
+  font-family: var(--mono);
+
+  font-size: 0.65rem;
+
+  margin-top: 4px;
+}
+
+.hero-cta {
+  display: flex;
+
+  gap: 1rem;
+
+  margin-top: 2.5rem;
+}
+
+.btn-primary,
+.btn-outline {
+  display: inline-block;
+
+  padding: 11px 20px;
+
+  border-radius: 5px;
+
+  font-family: var(--mono);
+
+  font-size: 0.75rem;
+
+  text-decoration: none;
+
+  transition: 0.2s;
+}
+
+.btn-primary {
+  background: var(--accent);
+
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--accent2);
+
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  border: 1px solid var(--border);
+
+  color: var(--text2);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent);
+
+  color: var(--accent);
+}
+
+/* Terminal */
+
+.hero-terminal {
+  position: relative;
+  z-index: 1;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  box-shadow: var(--glow-strong);
+}
+
+.term-header {
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 0 15px;
+
+  background: var(--surface2);
+
+  border-bottom: 1px solid var(--border);
+}
+
+.term-dot {
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+}
+
+.term-dot.red {
+  background: #ef4444;
+}
+
+.term-dot.yellow {
+  background: #f59e0b;
+}
+
+.term-dot.green {
+  background: #10b981;
+}
+
+.term-title {
+  margin-left: 8px;
+
+  color: var(--text3);
+
+  font-family: var(--mono);
+
+  font-size: 0.7rem;
+}
+
+.term-body {
+  padding: 25px;
+
+  font-family: var(--mono);
+
+  font-size: 0.75rem;
+
+  line-height: 1.8;
+}
+
+.term-line {
+  display: flex;
+
+  align-items: center;
+}
+
+.term-prompt {
+  color: var(--green);
+
+  font-weight: 700;
+}
+
+.term-cmd {
+  color: var(--text);
+}
+
+.term-out {
+  color: var(--text2);
+
+  padding-left: 18px;
+}
+
+.term-key {
+  color: var(--accent2);
+}
+
+.term-val {
+  color: #a7f3d0;
+}
+
+.term-cursor {
+  display: inline-block;
+
+  width: 7px;
+  height: 15px;
+
+  background: var(--accent);
+
+  margin-left: 6px;
+
+  animation: blink 1s infinite;
+}
