@@ -7,6 +7,9 @@ const router = express.Router();
 const uploadResume = require(
   "../middleware/uploadMiddleware"
 );
+const { requireAdmin } = require(
+  "../middleware/authMiddleware"
+);
 
 const resumePath = path.join(
   __dirname,
@@ -36,6 +39,7 @@ router.get("/", (req, res) => {
 
 router.post(
   "/upload",
+  requireAdmin,
   uploadResume.single("resume"),
   (req, res) => {
     if (!req.file) {

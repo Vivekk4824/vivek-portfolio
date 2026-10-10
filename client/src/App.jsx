@@ -1,3 +1,4 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import usePortfolio from "./hooks/usePortfolio";
@@ -8,11 +9,9 @@ import Projects from "./components/Projects";
 import Achievements from "./components/Achievements";
 import Certificates from "./components/Certificates";
 import Education from "./components/Education";
+import AdminResume from "./pages/AdminResume";
 
-
-
-
-function App() {
+function Portfolio() {
   const {
     data,
     loading,
@@ -50,6 +49,17 @@ function App() {
         <Education education={data.education} />
       </main>
     </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Portfolio />} />
+        <Route path="/admin/resume" element={<AdminResume />} />
+      </Routes>
+    </Router>
   );
 }
 
